@@ -1,0 +1,27 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <h2 class="header center teal-text">Управление публикациями</h2>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="col s6">
+      <div *ngFor="let post of posts; let i=index" class="col s6 m6 l3">
+        <div  class="card grey lighten-5">
+          <div class="card-content white-text center">
+            <a [routerLink]="['/post-details/', post.id]" ><span class="card-title">{{ post.title }}</span></a>
+            <p class="black-text" [innerHtml]="post.text.substring(0, 150).concat('...')"></p>
+            <a [routerLink]="['/post-details/', post.id]" >Читать далее...</a>
+          </div>
+          <div class="card-action center">
+            <button style="display: inline;margin: 2%;" class="btn-small red"  (click)="deletePost(post.id)" >Удалить</button> &nbsp;
+            <button style="display: inline;" class="btn-small orange" (click)="editPost(post.id)" >Редактировать</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

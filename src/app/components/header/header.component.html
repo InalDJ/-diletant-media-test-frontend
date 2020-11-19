@@ -1,0 +1,62 @@
+<nav>
+    <div class="nav-wrapper">
+      <a routerLink="/" class="brand-logo center hide-on-med-and-down"><img id="logo" src="assets/pictures/android-icon-192x192.png"></a>
+      <a routerLink="/" class="brand-logo center hide-on-large-only"><img width="27%" id="logo2" src="assets/pictures/android-icon-192x192.png"></a>
+
+      <ul *ngIf="!isLoggedIn" id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a style="font-size: small;" routerLink="/sign-up">| Регистрация |</a></li>
+        <li><a style="font-size: small;" routerLink="/login">| Войти |</a></li>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      </ul>
+      <ul *ngIf="isLoggedIn" id="nav-mobile" class="right hide-on-med-and-down">
+        <li style="font-size: small;" >| Добро пожаловать, {{ username }} |</li>
+        <li><a style="font-size: small;" routerLink="/create-post">| Написать статью |</a></li>
+        <li><a style="font-size: small;" routerLink="/manage-posts">| Управление статьями |</a></li>
+        <li><a style="font-size: small;" role="button" (click)="logout()">| Выйти |</a></li>
+      </ul><a href="#slide-out" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+
+
+
+    <ul id="slide-out" class="sidenav" *ngIf="isLoggedIn">
+      <li><div class="user-view">
+      
+        <a href="#user"> <img width="37%" id="logo" src="assets/pictures/android-icon-192x192.png"></a>
+        <a href="#name"><span class="teal-text name"> Добро пожаловать, {{ username }}</span></a>
+      </div></li>
+      <li><div class="divider"></div></li>
+      <li><a class="waves-effect sidenav-close" routerLink="/create-post">| Написать статью |</a></li>
+      <li><a class="waves-effect sidenav-close" routerLink="/manage-posts">| Управление статьями |</a></li>
+      <li><a class="waves-effect sidenav-close" role="button" (click)="logout()">| Выйти |</a></li>
+    </ul>
+
+    <ul id="slide-out" class="sidenav" *ngIf="!isLoggedIn">
+      <li><div class="user-view">
+      
+        <a href="#user"> <img width="36%" id="logo" src="assets/pictures/android-icon-192x192.png"></a>
+       
+      </div></li>
+      <li><div class="divider"></div></li>
+      <li><a class="waves-effect sidenav-close" routerLink="/sign-up">| Регистрация |</a></li>
+      <li><a class="waves-effect sidenav-close" routerLink="/login">| Войти |</a></li>
+    </ul>
+    
+
+
+
+  </nav>
+
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 offset-l1 offset-m1">
+          <form [formGroup]="searchForm">
+          <label class="label-icon" for="search"><i style="margin-top: 2%;" class="material-icons left cyan-text darken-3">search</i></label>
+         
+          <input [formControlName]="'keyword'" class="validate col s7" id="search" type="text" placeholder="Поиск статей" > &nbsp;&nbsp;
+          <button style="margin-top: 1%;" (click)="search()" class="btn cyan darken-3">Поиск</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>

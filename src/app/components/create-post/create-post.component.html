@@ -1,0 +1,103 @@
+<div>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h2 class="header center teal-text">Написать статью</h2>
+            <h4 *ngIf="isError" class="header center red-text">Произошла ошибка при создании статьи!</h4>
+        </div>
+    </div>
+</div>
+ 
+<div class="section">
+    <div class="container">
+
+        <form [formGroup]="createPostForm" (ngSubmit)="createPost()">
+            <div class="row">
+                <div class="col s12">
+                    <input type="text" id="title" name="title" [formControlName]="'title'" placeholder="Заголовок" required>
+                    <label class="red-text text-lighten-2" for="title" style="margin-top: -15%;" *ngIf="!createPostForm.get('title').valid && createPostForm.get('title').touched">Пожалуйста заполните название!</label> 
+                    <editor name="text" id="text" required [formControlName]="'text'" [init]="{
+                        height: 500,
+                        menubar: false,
+                        plugins: [
+                          'advlist autolink lists link image charmap print preview anchor',
+                          'searchreplace visualblocks code fullscreen',
+                          'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                          'undo redo | formatselect | bold italic backcolor | \
+                          alignleft aligncenter alignright alignjustify | \
+                          bullist numlist outdent indent | removeformat | help'
+                      }"></editor>
+                      <label class="red-text text-lighten-2" for="text" style="margin-top: -15%;" *ngIf="!createPostForm.get('text').valid && createPostForm.get('text').touched">Пожалуйста внесите текст!</label> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s8">
+                    <div *ngIf="post.tags.length != 0">
+                        <p class="orange-text">Добавленные теги: </p>
+                        <div style="margin:0;display:inline-block;" *ngFor="let tag of post.tags; let h = index;">
+                            <div class="chip">
+                                {{tag}}
+                                <i class="close material-icons"><a role="button" (click)="deleteTag(tag)">close</a></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="orange-text">Популярные теги: </p>
+
+                        <div style="display:inline-block;" *ngFor="let tag of tagsFromDb; let j = index;">
+                            <a [routerLink]="" (click)="addTagFromDb(tag)">
+                            <div class="chip">
+                                {{tag}}
+                                <i class="close cyan-text material-icons">done</i>
+                            </div></a>
+                        </div>
+                        
+                        
+                    </div>
+                  
+                    <div>
+                        <input class="col s6" type="text" [formControlName]="'tag'" placeholder="Тег">
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <button class="btn-small" style="vertical-align: middle;" (click)="addTag()">Добавить
+                            тег</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <input type="text" name="author" id="author" class="col s7" [formControlName]="'author'" placeholder="Автор" required>
+                    <label class="red-text text-lighten-2" for="author" style="margin-left: -61%; margin-top: -30%;" *ngIf="!createPostForm.get('author').valid && createPostForm.get('author').touched">Пожалуйста внесите текст!</label> 
+
+                </div>
+            </div>
+        
+
+            <div *ngIf="isError" class="row">
+                <div class="col s12 offset-s3">
+                    <span class="red-text center">Произошла ошибка</span>
+                </div>
+               
+            </div>
+
+            <div class="row">
+                <div class="col s8 offset-s3">
+                    
+                    <button [disabled]="!createPostForm.get('title').valid 
+                    || !createPostForm.get('author').valid 
+                    || !createPostForm.get('text').valid
+                    || post.tags.length == 0" 
+                    id="create-post" class="btn" type="submit" >Создать статью</button>
+                    &nbsp; &nbsp;
+                    <button class="btn red" (click)="discardPost()">Отмена</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+</div>
+

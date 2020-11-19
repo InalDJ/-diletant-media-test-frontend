@@ -1,0 +1,27 @@
+
+  .slider1 {
+      width: 55vw;
+      height: auto;
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    .slide1 {
+      width: 55vw;
+      flex-shrink: 0;
+      height: 100%;
+    }
+  
+    .slider1 > div {
+      /* CURRENT way. */
+      scroll-snap-align: start;
+    }
+  
+    #card-item1 {
+      width: 51vw;
+      margin-left: 3%;
+    }
+
+  
+  

@@ -1,0 +1,35 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h4 class="header teal-text lighten-3 center">Рекомендовано Вам</h4>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 offset-l1 offset-s2 offset-m1">
+
+                <div class="slider1">
+                    <div class="slide1" *ngFor="let post of posts; let b = index;">
+                        <div id="card-item1" class="card grey lighten-5">
+                            <div class="card-content white-text center">
+                                <a [routerLink]="" (click)="postDetails(post.id)"><span style="font-size: middle;"
+                                        class="card-title">{{ post.title }}</span></a>
+                            </div>
+                            <div class="card-action center"> 
+                                <a style="font-size: small;" *ngFor="let tag of post.tags.slice(0, 10); let j=index"
+                                    [routerLink]="['/searchByTag/', tag]">{{ tag }} </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

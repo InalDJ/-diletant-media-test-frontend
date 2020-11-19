@@ -1,0 +1,42 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3 class="header center teal-text">{{ post.title }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <p class="justify" [innerHtml]="post.text"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <a [routerLink]="['/searchByAuthor/', post.author]"><p class="center">Автор текcта: <b>{{ post.author }}</b></p></a>
+                <div>
+                    <p style="margin:0;display:inline-block;" class="orange-text">Теги:   </p>
+                    <div style="margin:0;display:inline-block;" *ngFor="let tag of post.tags">
+                        <a [routerLink]="['/searchByTag/', tag]"><div class="chip">
+                            {{tag}}
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <app-recommended-posts></app-recommended-posts>
+</div>
